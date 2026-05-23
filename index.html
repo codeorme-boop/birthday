@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Purnima 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #050505;
+    --deep: #0a0a0a;
+    --card: #111111;
+    --border: #1e1e1e;
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --gold-dim: #7a6228;
+    --rose: #c0546a;
+    --rose-light: #e8799a;
+    --cream: #f5ead8;
+    --text: #e8dcc8;
+    --muted: #7a7060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ---- PARTICLES ---- */
+  #particles {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+  @keyframes float-up {
+    0%   { opacity: 0; transform: translateY(0) scale(0); }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { opacity: 0; transform: translateY(-100vh) scale(1.5); }
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center; gap: 0;
+    padding: 16px 24px;
+    background: linear-gradient(to bottom, rgba(5,5,5,0.95), transparent);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    backdrop-filter: blur(8px);
+  }
+  .nav-btn {
+    background: none; border: none; color: var(--muted);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    padding: 8px 20px; cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+    border-bottom: 1px solid transparent;
+    position: relative;
+  }
+  .nav-btn::after {
+    content: ''; position: absolute; bottom: -1px; left: 50%; right: 50%;
+    height: 1px; background: var(--gold);
+    transition: left 0.3s, right 0.3s;
+  }
+  .nav-btn:hover, .nav-btn.active { color: var(--gold); }
+  .nav-btn:hover::after, .nav-btn.active::after { left: 0; right: 0; }
+
+  /* ---- MUSIC BUTTON ---- */
+  .music-btn {
+    position: fixed; bottom: 32px; right: 32px; z-index: 200;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold); font-size: 20px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s; backdrop-filter: blur(8px);
+    animation: pulse-ring 2.5s ease-in-out infinite;
+  }
+  .music-btn:hover { background: rgba(201,168,76,0.25); transform: scale(1.08); }
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.3); }
+    50%       { box-shadow: 0 0 0 10px rgba(201,168,76,0); }
+  }
+
+  /* ---- PAGES ---- */
+  .page { display: none; min-height: 100vh; padding-top: 80px; position: relative; z-index: 1; }
+  .page.active { display: block; animation: fade-in 0.6s ease; }
+  @keyframes fade-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ======== PAGE 1: HOME ======== */
+  #home {
+    display: none;
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 80px 24px 60px;
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(192,84,106,0.05) 0%, transparent 60%),
+      var(--black);
+  }
+  #home.active { display: flex; }
+
+  .home-candles {
+    font-size: 40px; letter-spacing: 8px; margin-bottom: 28px;
+    animation: flicker 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes flicker {
+    from { filter: brightness(1); text-shadow: 0 0 20px rgba(255,200,50,0.4); }
+    to   { filter: brightness(1.15); text-shadow: 0 0 40px rgba(255,200,50,0.7); }
+  }
+
+  .home-sub {
+    font-size: 12px; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; opacity: 0.8;
+  }
+  .home-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(64px, 12vw, 120px);
+    color: var(--gold);
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(201,168,76,0.3), 0 4px 40px rgba(0,0,0,0.8);
+    margin-bottom: 24px;
+    animation: shimmer 3s ease-in-out infinite alternate;
+  }
+  @keyframes shimmer {
+    from { text-shadow: 0 0 40px rgba(201,168,76,0.3); }
+    to   { text-shadow: 0 0 80px rgba(240,208,128,0.6), 0 0 120px rgba(201,168,76,0.2); }
+  }
+  .home-tagline {
+    font-size: clamp(18px, 3vw, 26px);
+    font-style: italic;
+    color: var(--cream);
+    opacity: 0.7;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .home-photo {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold-dim);
+    box-shadow: 0 0 0 8px rgba(201,168,76,0.06), 0 0 60px rgba(201,168,76,0.15);
+    margin-bottom: 48px;
+    transition: transform 0.4s;
+  }
+  .home-photo:hover { transform: scale(1.03); }
+
+  .home-divider {
+    display: flex; align-items: center; gap: 16px;
+    color: var(--gold-dim); font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; margin-bottom: 40px;
+  }
+  .home-divider::before, .home-divider::after {
+    content: ''; flex: 1; max-width: 80px;
+    height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim));
+  }
+  .home-divider::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
+
+  .celebrate-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+    padding: 14px 40px; cursor: pointer;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .celebrate-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .celebrate-btn:hover { color: var(--black); }
+  .celebrate-btn:hover::before { transform: scaleX(1); }
+  .celebrate-btn span { position: relative; z-index: 1; }
+
+  /* ======== PAGE 2: NOTES ======== */
+  #notes {
+    padding: 80px 24px 80px;
+    background: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(192,84,106,0.04) 0%, transparent 70%), var(--black);
+  }
+
+  .section-header {
+    text-align: center; margin-bottom: 60px;
+  }
+  .section-eyebrow {
+    font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--rose); margin-bottom: 12px; display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 56px);
+    color: var(--cream); font-weight: 400;
+    line-height: 1.15;
+  }
+  .section-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--rose), transparent);
+    margin: 20px auto 0;
+  }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px; max-width: 1000px; margin: 0 auto;
+  }
+  .note-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+  .note-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: linear-gradient(to bottom, var(--gold), var(--rose));
+    transition: height 0.4s;
+  }
+  .note-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.2); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+  .note-card:hover::before { height: 100%; }
+  .note-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+  .note-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--gold); margin-bottom: 14px;
+    font-style: italic;
+  }
+  .note-text { font-size: 16px; line-height: 1.85; color: var(--text); opacity: 0.85; }
+
+  .big-note {
+    max-width: 720px; margin: 48px auto 0;
+    background: var(--card); border: 1px solid rgba(201,168,76,0.15);
+    padding: 48px 48px; text-align: center;
+    position: relative;
+  }
+  .big-note::before, .big-note::after {
+    content: '❝'; position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 120px; color: rgba(201,168,76,0.06);
+    line-height: 1;
+  }
+  .big-note::before { top: -10px; left: 16px; }
+  .big-note::after { content: '❞'; bottom: -50px; right: 16px; }
+  .big-note p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3vw, 24px);
+    font-style: italic; line-height: 1.8;
+    color: var(--cream); opacity: 0.9;
+    position: relative; z-index: 1;
+  }
+  .big-note-sig {
+    margin-top: 24px; font-size: 14px; letter-spacing: 2px;
+    color: var(--gold); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  /* ======== PAGE 3: GALLERY ======== */
+  #gallery {
+    padding: 80px 24px 80px;
+    background: var(--black);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 900px; margin: 0 auto;
+  }
+  .gallery-item {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    background: var(--card);
+  }
+  .gallery-item:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16/9;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
+    filter: brightness(0.85) contrast(1.05);
+  }
+  .gallery-item:hover img { transform: scale(1.06); filter: brightness(1) contrast(1.05); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    display: flex; align-items: flex-end;
+    padding: 24px; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px; color: var(--gold);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(0,0,0,0.95);
+    align-items: center; justify-content: center;
+    padding: 40px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw; max-height: 85vh;
+    object-fit: contain;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .lightbox-close {
+    position: absolute; top: 24px; right: 32px;
+    background: none; border: none; color: var(--gold);
+    font-size: 32px; cursor: pointer; line-height: 1;
+  }
+
+  /* ======== PAGE 4: MESSAGE ======== */
+  #message {
+    padding: 80px 24px 80px;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 30%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      var(--black);
+  }
+
+  .message-wrap { max-width: 720px; margin: 0 auto; }
+
+  .letter-paper {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 60px 56px;
+    position: relative;
+    margin-bottom: 48px;
+  }
+  .letter-paper::before {
+    content: '';
+    position: absolute; top: 16px; left: 16px; right: 16px; bottom: 16px;
+    border: 1px solid rgba(201,168,76,0.08);
+    pointer-events: none;
+  }
+  .letter-date {
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 32px;
+  }
+  .letter-salutation {
+    font-family: 'Dancing Script', cursive;
+    font-size: 40px; color: var(--rose-light);
+    margin-bottom: 24px; display: block;
+  }
+  .letter-body {
+    font-size: 17px; line-height: 2;
+    color: var(--text); opacity: 0.9;
+  }
+  .letter-body p + p { margin-top: 20px; }
+  .letter-closing {
+    margin-top: 40px; font-style: italic;
+    color: var(--gold); font-size: 18px;
+  }
+  .letter-sig {
+    font-family: 'Dancing Script', cursive;
+    font-size: 34px; color: var(--rose-light);
+    margin-top: 8px; display: block;
+  }
+
+  /* Wish form */
+  .wish-section { text-align: center; }
+  .wish-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--cream); margin-bottom: 8px; font-weight: 400;
+  }
+  .wish-section p { color: var(--muted); font-size: 15px; margin-bottom: 32px; }
+
+  .wish-form { display: flex; flex-direction: column; gap: 16px; }
+  .wish-input, .wish-textarea {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text); font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; padding: 14px 18px;
+    outline: none; transition: border-color 0.3s;
+    resize: none;
+  }
+  .wish-input:focus, .wish-textarea:focus { border-color: var(--gold-dim); }
+  .wish-textarea { height: 120px; }
+  .wish-submit {
+    background: transparent; border: 1px solid var(--gold);
+    color: var(--gold); font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
+    padding: 14px 36px; cursor: pointer;
+    transition: all 0.3s; align-self: center;
+    position: relative; overflow: hidden;
+  }
+  .wish-submit::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .wish-submit:hover { color: var(--black); }
+  .wish-submit:hover::before { transform: scaleX(1); }
+  .wish-submit span { position: relative; z-index: 1; }
+  .wishes-wall { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+  .wish-bubble {
+    background: var(--card); border-left: 3px solid var(--rose);
+    padding: 20px 24px;
+    animation: fade-in 0.5s ease;
+  }
+  .wish-bubble .wish-from { color: var(--gold); font-size: 14px; margin-bottom: 6px; }
+  .wish-bubble .wish-msg { color: var(--text); font-size: 16px; line-height: 1.7; opacity: 0.85; }
+
+  /* ======== PAGE 5: TIMELINE / MEMORIES ======== */
+  #memories {
+    padding: 80px 24px 80px;
+    background: var(--black);
+  }
+  .timeline {
+    max-width: 680px; margin: 0 auto;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 20px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold-dim), var(--rose), transparent);
+  }
+  .tl-item {
+    display: flex; gap: 32px; margin-bottom: 52px;
+    padding-left: 16px;
+    position: relative;
+  }
+  .tl-dot {
+    flex-shrink: 0; width: 9px; height: 9px;
+    border-radius: 50%; background: var(--gold);
+    margin-top: 8px; position: relative; z-index: 1;
+    box-shadow: 0 0 12px rgba(201,168,76,0.5);
+  }
+  .tl-content { flex: 1; }
+  .tl-year {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 8px;
+  }
+  .tl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--cream); margin-bottom: 10px; font-weight: 400;
+  }
+  .tl-text { font-size: 16px; line-height: 1.8; color: var(--text); opacity: 0.75; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center; padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 13px; letter-spacing: 1px;
+  }
+  footer span { color: var(--rose); }
+
+  /* ---- CONFETTI BURST ---- */
+  .confetti-container {
+    position: fixed; inset: 0; pointer-events: none; z-index: 999;
+  }
+  .confetti-bit {
+    position: absolute;
+    width: 8px; height: 8px;
+    opacity: 0;
+    animation: confetti-fall 2s ease forwards;
+  }
+  @keyframes confetti-fall {
+    0%   { opacity: 1; transform: translateY(-20px) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+  }
+
+  @media (max-width: 600px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item:first-child { aspect-ratio: 4/5; }
+    .letter-paper { padding: 36px 28px; }
+    nav { gap: 0; }
+    .nav-btn { padding: 8px 10px; font-size: 11px; letter-spacing: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating particles -->
+<div id="particles"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- Confetti container -->
+<div class="confetti-container" id="confetti"></div>
+
+<!-- Nav -->
+<nav>
+  <button class="nav-btn active" onclick="showPage('home', this)">Home</button>
+  <button class="nav-btn" onclick="showPage('notes', this)">Notes</button>
+  <button class="nav-btn" onclick="showPage('gallery', this)">Gallery</button>
+  <button class="nav-btn" onclick="showPage('message', this)">Message</button>
+  <button class="nav-btn" onclick="showPage('memories', this)">Memories</button>
+</nav>
+
+<!-- Music button -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Toggle music">♪</button>
+
+<!-- Hidden audio -->
+<!-- <audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
+</audio> -->
+<audio src="audio.mp3" autoplay loop></audio>
+
+<!-- ===== PAGE: HOME ===== -->
+<section class="page active" id="home">
+  <div class="home-candles">🕯️ 🎂 🕯️</div>
+  <p class="home-sub">A special day for a special soul</p>
+  <h4 class="home-name">Happy Birthday </h4>
+  <h1 class="home-name">Purnima ✨</h1>
+  <p class="home-tagline">May today be as radiant and wonderful as you have always been to everyone around you.</p>
+  <div class="home-divider">♦ Happy Birthday ♦</div>
+  <img src="https://i.ibb.co/wrM5dGbV/Whats-App-Image-2026-05-22-at-23-08-03-1.jpg" alt="Poornima" class="home-photo">
+  <button class="celebrate-btn" onclick="burst(); showPage('notes', document.querySelectorAll('.nav-btn')[1])">
+    <span>✦ Celebrate with me ✦</span>
+  </button>
+</section>
+
+<!-- ===== PAGE: NOTES ===== -->
+<section class="page" id="notes">
+  <div class="section-header">
+    <span class="section-eyebrow">With all the love</span>
+    <h2 class="section-title">Birthday Notes for You</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="notes-grid">
+    <div class="note-card">
+      <span class="note-icon">🌸</span>
+      <h3 class="note-title">You are Sunshine</h3>
+      <p class="note-text">There's something about you that lights up every room you walk into. Your presence alone makes everything feel warmer, brighter, and more alive.</p>
+    </div>
+    <div class="note-card">
+      <span class="note-icon">💫</span>
+      <h3 class="note-title">Endlessly Kind</h3>
+      <p class="note-text">Your kindness isn't just a quality — it's your superpower. You give without keeping score, and that is one of the rarest things in this world.</p>
+    </div>
+    <div class="note-card">
+      <span class="note-icon">🔥</span>
+      <h3 class="note-title">Unstoppable You</h3>
+      <p class="note-text">Every dream you chase, every challenge you face — you meet it with grace and grit. You are so much stronger than you know.</p>
+    </div>
+    <div class="note-card">
+      <span class="note-icon">🌙</span>
+      <h3 class="note-title">A Rare Soul</h3>
+      <p class="note-text">In a world of millions, meeting someone like you feels like stumbling upon a hidden treasure. You are one of a kind, truly and completely.</p>
+    </div>
+    <div class="note-card">
+      <span class="note-icon">✨</span>
+      <h3 class="note-title">Pure Magic</h3>
+      <p class="note-text">The way you laugh, the way you care, the way you show up for people — it's pure, unfiltered magic. Never stop being exactly who you are.</p>
+    </div>
+    <div class="note-card">
+      <span class="note-icon">🎯</span>
+      <h3 class="note-title">Your Year Awaits</h3>
+      <p class="note-text">This birthday marks the beginning of something beautiful. May this year bring you everything your heart deserves — which is everything wonderful.</p>
+    </div>
+  </div>
+
+  <div class="big-note">
+    <p>"To the world you may be one person, but to the people who love you, you are the whole world. Happy Birthday, Poornima — keep shining endlessly."</p>
+    <div class="big-note-sig">— With all the love in the universe</div>
+  </div>
+</section>
+
+<!-- ===== PAGE: GALLERY ===== -->
+<section class="page" id="gallery">
+  <div class="section-header">
+    <span class="section-eyebrow">A gallery of moments</span>
+    <h2 class="section-title">Your Beautiful Story</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/wrM5dGbV/Whats-App-Image-2026-05-22-at-23-08-03-1.jpg')">
+      <img src="https://i.ibb.co/wrM5dGbV/Whats-App-Image-2026-05-22-at-23-08-03-1.jpg" alt="Poornima Photo 1">
+      <div class="gallery-overlay"><span class="gallery-caption">Pure radiance ✨</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/tfRvWbh/Whats-App-Image-2026-05-22-at-23-08-02.jpg')">
+      <img src="https://i.ibb.co/tfRvWbh/Whats-App-Image-2026-05-22-at-23-08-02.jpg" alt="Poornima Photo 2">
+      <div class="gallery-overlay"><span class="gallery-caption">Timeless grace 🌸</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/RGZgyvpt/Whats-App-Image-2026-05-22-at-23-08-03.jpg')">
+      <img src="https://i.ibb.co/RGZgyvpt/Whats-App-Image-2026-05-22-at-23-08-03.jpg" alt="Poornima Photo 3">
+      <div class="gallery-overlay"><span class="gallery-caption">Simply beautiful 💫</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/dJ3V85Fh/Whats-App-Image-2026-05-22-at-23-10-08.jpg')">
+      <img src="https://i.ibb.co/dJ3V85Fh/Whats-App-Image-2026-05-22-at-23-10-08.jpg" alt="Poornima Photo 4">
+      <div class="gallery-overlay"><span class="gallery-caption">Golden moments 🌟</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE: MESSAGE ===== -->
+<section class="page" id="message">
+  <div class="section-header">
+    <span class="section-eyebrow">From the heart</span>
+    <h2 class="section-title">A Letter for Purnima</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="message-wrap">
+    <div class="letter-paper">
+      <div class="letter-date">May 23, 2026 &nbsp;·&nbsp; Your Special Day</div>
+      <span class="letter-salutation">Dearest Purnima✨,</span>
+      <div class="letter-body">
+        <p>On this day, I want you to know just how much you mean to everyone around you. Birthdays are funny things — they come once a year, yet somehow they feel like the perfect excuse to say all the things we should have been saying all along.</p>
+        <p>So here it is: You are extraordinary. Not in a quiet, subtle way — but loudly, brightly, undeniably extraordinary. The way you show up for people, the way you find joy in small moments, the way you carry yourself with such warmth — it doesn't go unnoticed.</p>
+        <p>Life has big things planned for you, Poornima. And as you step into this new year of your life, I hope you carry with you the certainty that you are deeply loved, endlessly admired, and truly cherished.</p>
+        <p>May every birthday wish you make come true, may every dream you carry in your heart find its way to you, and may this year be your most beautiful yet.</p>
+      </div>
+      <div class="letter-closing">With all the love in the world,</div>
+      <span class="letter-sig">Your people 💛</span>
+    </div>
+
+    <div class="wish-section">
+      <h3>Leave a Birthday Wish</h3>
+      <p>Share your love and warm wishes for Poornima</p>
+      <div class="wish-form">
+        <input class="wish-input" id="wishName" type="text" placeholder="Your name">
+        <textarea class="wish-textarea" id="wishMsg" placeholder="Your birthday message for Poornima..."></textarea>
+        <button class="wish-submit" onclick="submitWish()"><span>Send Wish ✦</span></button>
+      </div>
+      <div class="wishes-wall" id="wishesWall"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE: MEMORIES ===== -->
+<section class="page" id="memories">
+  <div class="section-header">
+    <span class="section-eyebrow">Celebrating you</span>
+    <h2 class="section-title">Chapters of Poornima</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">✦ The Beginning</div>
+        <h3 class="tl-title">A Star Was Born</h3>
+        <p class="tl-text">On this day, the universe decided to send someone truly special into the world. And what a gift that turned out to be for everyone who has the joy of knowing you.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">✦ Growing Up</div>
+        <h3 class="tl-title">Becoming Yourself</h3>
+        <p class="tl-text">Through every chapter, every season, every twist and turn — you've grown into someone remarkable. Not despite the hard parts, but because of how gracefully you faced them.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">✦ The Friendships</div>
+        <h3 class="tl-title">Bonds That Last Forever</h3>
+        <p class="tl-text">You have a way of making people feel seen and valued. The friendships you've built are testaments to who you are — loyal, genuine, and full of heart.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">✦ Today</div>
+        <h3 class="tl-title">Your Birthday — Own It</h3>
+        <p class="tl-text">Today is yours. Every laugh, every celebration, every good feeling — all for you. You deserve every bit of the joy this day brings.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">✦ The Future</div>
+        <h3 class="tl-title">The Best is Yet to Come</h3>
+        <p class="tl-text">Your story is still being written, and every page ahead is full of possibility. May the coming year bring adventures, love, growth, and everything you've been dreaming of.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Made with <span>♥</span> especially for Poornima &nbsp;·&nbsp; Happy Birthday 🎂
+</footer>
+
+<script>
+  // ---- PARTICLES ----
+  const container = document.getElementById('particles');
+  const colors = ['#c9a84c','#f0d080','#c0546a','#e8799a','#ffffff'];
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.bottom = '-10px';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (6 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+    p.style.opacity = Math.random() * 0.8;
+    container.appendChild(p);
+  }
+
+  // ---- PAGE NAVIGATION ----
+  function showPage(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+
+  // ---- MUSIC ----
+  const audio = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicBtn');
+  let playing = false;
+
+  function toggleMusic() {
+    if (playing) {
+      audio.pause();
+      musicBtn.textContent = '♪';
+      musicBtn.style.color = 'var(--gold)';
+    } else {
+      audio.play().catch(() => {});
+      musicBtn.textContent = '♫';
+      musicBtn.style.color = 'var(--rose-light)';
+    }
+    playing = !playing;
+  }
+
+  // Auto-play on first interaction
+  document.body.addEventListener('click', function tryPlay() {
+    if (!playing) {
+      audio.play().then(() => {
+        playing = true;
+        musicBtn.textContent = '♫';
+        musicBtn.style.color = 'var(--rose-light)';
+      }).catch(() => {});
+    }
+    document.body.removeEventListener('click', tryPlay);
+  }, { once: true });
+
+  // ---- LIGHTBOX ----
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  // ---- CONFETTI BURST ----
+  function burst() {
+    const container = document.getElementById('confetti');
+    container.innerHTML = '';
+    const shapes = ['■','●','★','▲','♥','♦'];
+    const cols = ['#c9a84c','#f0d080','#c0546a','#e8799a','#fff'];
+    for (let i = 0; i < 80; i++) {
+      const b = document.createElement('div');
+      b.className = 'confetti-bit';
+      b.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+      b.style.left = Math.random() * 100 + 'vw';
+      b.style.top = '-20px';
+      b.style.color = cols[Math.floor(Math.random() * cols.length)];
+      b.style.fontSize = (10 + Math.random() * 14) + 'px';
+      b.style.animationDelay = (Math.random() * 0.8) + 's';
+      b.style.animationDuration = (1.5 + Math.random()) + 's';
+      container.appendChild(b);
+    }
+    setTimeout(() => container.innerHTML = '', 3000);
+  }
+
+  // ---- WISH WALL ----
+  const defaultWishes = [
+    { name: 'Your Best Friend', msg: 'Happy Birthday Poornima! You deserve all the happiness in this world. Wishing you the most amazing day! 🎉' },
+    { name: 'Family', msg: 'Our dearest Poornima, watching you grow into the incredible person you are fills our hearts with pride. Happy Birthday! ❤️' }
+  ];
+
+  function renderWishes() {
+    const wall = document.getElementById('wishesWall');
+    const stored = JSON.parse(localStorage.getItem('poornima_wishes') || '[]');
+    const all = [...defaultWishes, ...stored];
+    wall.innerHTML = all.map(w => `
+      <div class="wish-bubble">
+        <div class="wish-from">✦ ${w.name}</div>
+        <div class="wish-msg">${w.msg}</div>
+      </div>
+    `).join('');
+  }
+
+  function submitWish() {
+    const name = document.getElementById('wishName').value.trim();
+    const msg = document.getElementById('wishMsg').value.trim();
+    if (!name || !msg) { alert('Please enter your name and message ✦'); return; }
+    const stored = JSON.parse(localStorage.getItem('poornima_wishes') || '[]');
+    stored.push({ name, msg });
+    localStorage.setItem('poornima_wishes', JSON.stringify(stored));
+    document.getElementById('wishName').value = '';
+    document.getElementById('wishMsg').value = '';
+    renderWishes();
+    burst();
+  }
+
+  renderWishes();
+</script>
+</body>
+</html>
