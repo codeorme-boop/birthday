@@ -22,7 +22,6 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-
 html{scroll-behavior:smooth}
 
 body{
@@ -56,9 +55,7 @@ nav{
   padding:8px 10px;
 }
 
-.nav-btn:hover{
-  color:var(--gold);
-}
+.nav-btn:hover{color:var(--gold)}
 
 .music-btn{
   position:fixed;
@@ -96,10 +93,7 @@ section{
   background:radial-gradient(ellipse at top,rgba(201,168,76,.08),transparent 65%),var(--black);
 }
 
-.home-candles{
-  font-size:40px;
-  margin-bottom:25px;
-}
+.home-candles{font-size:40px;margin-bottom:25px}
 
 .home-sub{
   color:var(--gold);
@@ -136,7 +130,7 @@ section{
   margin:25px 0 35px;
 }
 
-.celebrate-btn,.wish-submit{
+.celebrate-btn{
   display:inline-block;
   text-decoration:none;
   background:transparent;
@@ -148,7 +142,7 @@ section{
   cursor:pointer;
 }
 
-.celebrate-btn:hover,.wish-submit:hover{
+.celebrate-btn:hover{
   background:var(--gold);
   color:var(--black);
 }
@@ -193,9 +187,7 @@ section{
   transition:.3s;
 }
 
-.note-icon{
-  font-size:28px;
-}
+.note-icon{font-size:28px}
 
 .note-title{
   color:var(--gold);
@@ -235,9 +227,7 @@ section{
   background:var(--card);
 }
 
-.gallery-item:first-child{
-  grid-column:1/-1;
-}
+.gallery-item:first-child{grid-column:1/-1}
 
 .gallery-item img{
   width:100%;
@@ -247,9 +237,7 @@ section{
   transition:.5s;
 }
 
-.gallery-item:hover img{
-  transform:scale(1.06);
-}
+.gallery-item:hover img{transform:scale(1.06)}
 
 .lightbox{
   display:none;
@@ -262,9 +250,7 @@ section{
   padding:30px;
 }
 
-.lightbox.open{
-  display:flex;
-}
+.lightbox.open{display:flex}
 
 .lightbox img{
   max-width:90vw;
@@ -311,58 +297,12 @@ section{
   margin-bottom:20px;
 }
 
-.letter-body p{
-  margin-bottom:18px;
-}
+.letter-body p{margin-bottom:18px}
 
 .letter-sig{
   font-family:'Dancing Script',cursive;
   color:var(--rose-light);
   font-size:34px;
-}
-
-.wish-section{
-  text-align:center;
-  margin-top:50px;
-}
-
-.wish-form{
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  margin-top:25px;
-}
-
-.wish-input,.wish-textarea{
-  background:var(--card);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:15px;
-  font-size:16px;
-  font-family:inherit;
-}
-
-.wish-textarea{
-  min-height:120px;
-}
-
-.wishes-wall{
-  margin-top:35px;
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-}
-
-.wish-bubble{
-  background:var(--card);
-  border-left:3px solid var(--rose);
-  padding:18px;
-  text-align:left;
-}
-
-.wish-from{
-  color:var(--gold);
-  margin-bottom:5px;
 }
 
 .timeline{
@@ -396,6 +336,157 @@ section{
   line-height:1.8;
 }
 
+/* Wish Lantern Section */
+#wishLantern{
+  min-height:100vh;
+  text-align:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.12),transparent 2px),
+    radial-gradient(circle at 80% 30%,rgba(240,208,128,.18),transparent 2px),
+    radial-gradient(circle at 60% 70%,rgba(255,255,255,.12),transparent 2px),
+    radial-gradient(ellipse at bottom,rgba(201,168,76,.08),transparent 60%),
+    var(--black);
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.star{
+  position:absolute;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#fff;
+  opacity:.8;
+  animation:twinkle 2.5s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:.25;transform:scale(.7)}
+  to{opacity:1;transform:scale(1.25)}
+}
+
+.wish-box{
+  max-width:760px;
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+
+.wish-small{
+  color:var(--gold);
+  letter-spacing:5px;
+  text-transform:uppercase;
+  font-size:13px;
+  margin-bottom:18px;
+  font-weight:bold;
+}
+
+.wish-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(38px,7vw,62px);
+  color:var(--cream);
+  letter-spacing:4px;
+  margin-bottom:35px;
+  text-shadow:0 0 25px rgba(255,255,255,.18);
+}
+
+.wish-desc{
+  max-width:650px;
+  margin:0 auto 45px;
+  line-height:1.8;
+  font-size:18px;
+  color:var(--text);
+}
+
+.wish-textarea{
+  width:100%;
+  min-height:150px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(201,168,76,.18);
+  color:var(--cream);
+  padding:24px;
+  font-size:18px;
+  font-family:'Cormorant Garamond',serif;
+  outline:none;
+  resize:none;
+  margin-bottom:35px;
+}
+
+.wish-textarea::placeholder{
+  color:#d8c7a3;
+}
+
+.launch-btn{
+  background:rgba(0,0,0,.5);
+  color:#fff;
+  border:none;
+  padding:16px 38px;
+  border-radius:30px;
+  font-size:15px;
+  letter-spacing:3px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(201,168,76,.55);
+}
+
+.launch-btn:hover{
+  background:var(--gold);
+  color:#000;
+}
+
+.lantern{
+  position:fixed;
+  left:50%;
+  bottom:40px;
+  transform:translateX(-50%);
+  width:46px;
+  height:65px;
+  background:linear-gradient(to bottom,#ffd56b,#c77b22);
+  border-radius:22px 22px 12px 12px;
+  box-shadow:0 0 35px rgba(255,199,71,.9);
+  z-index:2500;
+  display:none;
+  animation:flyLantern 5s ease-in forwards;
+}
+
+.lantern::after{
+  content:"";
+  position:absolute;
+  bottom:-25px;
+  left:50%;
+  transform:translateX(-50%);
+  width:2px;
+  height:28px;
+  background:rgba(255,213,107,.8);
+}
+
+@keyframes flyLantern{
+  0%{bottom:40px;opacity:1}
+  100%{bottom:105vh;opacity:0}
+}
+
+.wishes-wall{
+  max-width:720px;
+  margin:45px auto 0;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  text-align:left;
+}
+
+.wish-bubble{
+  background:rgba(255,255,255,.035);
+  border-left:3px solid var(--gold);
+  padding:18px 22px;
+  color:var(--text);
+}
+
 footer{
   text-align:center;
   padding:35px 20px;
@@ -403,9 +494,7 @@ footer{
   color:var(--muted);
 }
 
-footer span{
-  color:var(--rose);
-}
+footer span{color:var(--rose)}
 
 .confetti-container{
   position:fixed;
@@ -430,6 +519,7 @@ footer span{
   .gallery-grid{grid-template-columns:1fr}
   .gallery-item:first-child{grid-column:auto}
   .letter-paper{padding:28px}
+  .wish-title{letter-spacing:2px}
 }
 </style>
 </head>
@@ -442,6 +532,7 @@ footer span{
   <a class="nav-btn" href="#gallery">Gallery</a>
   <a class="nav-btn" href="#message">Message</a>
   <a class="nav-btn" href="#memories">Memories</a>
+  <a class="nav-btn" href="#wishLantern">Wish</a>
 </nav>
 
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()">♪</button>
@@ -456,6 +547,7 @@ footer span{
 </div>
 
 <div class="confetti-container" id="confetti"></div>
+<div class="lantern" id="lantern"></div>
 
 <section id="home">
   <div class="home-candles">🕯️ 🎂 🕯️</div>
@@ -529,19 +621,6 @@ footer span{
       <p>With all the love in the world,</p>
       <span class="letter-sig">Your people 💛</span>
     </div>
-
-    <div class="wish-section">
-      <h2>Leave a Birthday Wish</h2>
-      <p>Share your love and warm wishes for Purnima</p>
-
-      <div class="wish-form">
-        <input class="wish-input" id="wishName" placeholder="Your name">
-        <textarea class="wish-textarea" id="wishMsg" placeholder="Your birthday message for Purnima..."></textarea>
-        <button class="wish-submit" onclick="submitWish()">Send Wish ✦</button>
-      </div>
-
-      <div class="wishes-wall" id="wishesWall"></div>
-    </div>
   </div>
 </section>
 
@@ -578,8 +657,31 @@ footer span{
   </div>
 </section>
 
+<section id="wishLantern">
+  <div class="stars" id="stars"></div>
+
+  <div class="wish-box">
+    <div class="wish-small">Whisper to the stars</div>
+    <h2 class="wish-title">Send a Wish into the Sky</h2>
+    <p class="wish-desc">
+      Type a deep, beautiful wish for Purnima. Once you hit submit, it will transform into a glowing gold lantern that rises into the starry sky above.
+    </p>
+
+    <textarea class="wish-textarea" id="wishMsg" placeholder="Write your secret wish here...
+
+I wish for a year filled with..."></textarea>
+
+    <br>
+
+    <button class="launch-btn" onclick="submitWish()">Launch Your Lantern ✈️</button>
+
+    <div class="wishes-wall" id="wishesWall"></div>
+  </div>
+</section>
+
 <footer>
-  Made with <span>♥️</span> especially for Purnima · Happy Birthday 🎂
+  Handcrafted with magic & affection. <br><br>
+  ©️ 2026 · Made with <span>♥️</span> for a special soul.
 </footer>
 
 <script>
@@ -643,44 +745,61 @@ function burst(){
   setTimeout(()=>box.innerHTML="",3000);
 }
 
-const defaultWishes = [
-  {name:"Your Best Friend",msg:"Happy Birthday Purnima! You deserve all the happiness in this world. 🎉"},
-  {name:"Family",msg:"Our dearest Purnima, happy birthday! ❤️"}
-];
+function createStars(){
+  const stars = document.getElementById("stars");
+  for(let i=0;i<55;i++){
+    const s = document.createElement("div");
+    s.className = "star";
+    s.style.left = Math.random()*100 + "%";
+    s.style.top = Math.random()*100 + "%";
+    s.style.animationDelay = Math.random()*3 + "s";
+    stars.appendChild(s);
+  }
+}
+
+function submitWish(){
+  const msg = document.getElementById("wishMsg").value.trim();
+
+  if(!msg){
+    alert("Please write your wish first ✨");
+    return;
+  }
+
+  const stored = JSON.parse(localStorage.getItem("purnima_sky_wishes") || "[]");
+  stored.push(msg);
+  localStorage.setItem("purnima_sky_wishes",JSON.stringify(stored));
+
+  document.getElementById("wishMsg").value = "";
+  renderWishes();
+  launchLantern();
+}
 
 function renderWishes(){
   const wall = document.getElementById("wishesWall");
-  const stored = JSON.parse(localStorage.getItem("purnima_wishes") || "[]");
-  const all = [...defaultWishes,...stored];
+  const stored = JSON.parse(localStorage.getItem("purnima_sky_wishes") || "[]");
 
-  wall.innerHTML = all.map(w=>`
+  wall.innerHTML = stored.map(w=>`
     <div class="wish-bubble">
-      <div class="wish-from">✦ ${w.name}</div>
-      <div class="wish-msg">${w.msg}</div>
+      ✨ ${w}
     </div>
   `).join("");
 }
 
-function submitWish(){
-  const name = document.getElementById("wishName").value.trim();
-  const msg = document.getElementById("wishMsg").value.trim();
+function launchLantern(){
+  const lantern = document.getElementById("lantern");
+  lantern.style.display = "block";
+  lantern.style.animation = "none";
 
-  if(!name || !msg){
-    alert("Please enter your name and message ✦");
-    return;
-  }
+  setTimeout(()=>{
+    lantern.style.animation = "flyLantern 5s ease-in forwards";
+  },50);
 
-  const stored = JSON.parse(localStorage.getItem("purnima_wishes") || "[]");
-  stored.push({name,msg});
-  localStorage.setItem("purnima_wishes",JSON.stringify(stored));
-
-  document.getElementById("wishName").value = "";
-  document.getElementById("wishMsg").value = "";
-
-  renderWishes();
-  burst();
+  setTimeout(()=>{
+    lantern.style.display = "none";
+  },5200);
 }
 
+createStars();
 renderWishes();
 </script>
 
