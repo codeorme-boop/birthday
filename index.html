@@ -516,10 +516,13 @@
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Toggle music">♪</button>
 
 <!-- Hidden audio -->
-<!-- <audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
-</audio> -->
-<audio src="audio.mp3" autoplay loop></audio>
+  <audio id="bgMusic" loop>
+  <source src="audio.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="document.getElementById('bgMusic').play()">
+  Play Music 🎵
+</button>
 
 <!-- ===== PAGE: HOME ===== -->
 <section class="page active" id="home">
